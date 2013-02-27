@@ -569,6 +569,27 @@ class Model
 	}
 
 	/**
+	 * return a copy of model's aliases attributes has
+	 * @return array A copy of the model's aliase attribute data
+	 */
+	public function aliases_attributes(){
+
+
+
+		$attributes = $this->attributes();
+		$aliases = array_flip( static::$alias_attribute );
+
+		foreach( $attributes as $name => $data ){
+			if( array_key_exists( $name, $aliases ) ){
+				unset( $attributes[$name] );
+				$attributes[ $aliases[$name] ] = $data;
+			}
+		}
+
+		return $attributes;
+
+	}
+	/**
 	 * Retrieve the primary key name.
 	 *
 	 * @param boolean Set to true to return the first value in the pk array only

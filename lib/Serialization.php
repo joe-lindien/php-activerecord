@@ -175,8 +175,10 @@ abstract class Serialization
 
 					if (!is_array($assoc))
 					{
-						$serialized = new $serializer_class($assoc, $options);
-						$this->attributes[$association] = $serialized->to_a();;
+						if( $assoc !== null ){
+							$serialized = new $serializer_class($assoc, $options);
+							$this->attributes[$association] = $serialized->to_a();
+						}
 					}
 					else
 					{
